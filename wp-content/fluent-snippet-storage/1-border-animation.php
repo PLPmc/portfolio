@@ -1,0 +1,57 @@
+<?php
+// <Internal Doc Start>
+/*
+*
+* @description: 
+* @tags: 
+* @group: 
+* @name: Border Animation
+* @type: css
+* @status: published
+* @created_by: 1
+* @created_at: 2025-12-01 06:39:04
+* @updated_at: 2025-12-04 10:24:54
+* @is_valid: 1
+* @updated_by: 1
+* @priority: 98
+* @run_at: wp_head
+* @load_as_file: yes
+* @load_in_block_editor: 
+* @condition: {"status":"no","run_if":"assertive","items":[[]]}
+*/
+?>
+<?php if (!defined("ABSPATH")) { return;} // <Internal Doc End> ?>
+:root {
+	--border-animation-color: #52fe7d73;
+	--border-animation-speed: 7s;
+	--border-animation-width: 1px;
+}
+
+@property --border-animation-angle {
+	syntax: "<angle>";
+	initial-value: 0turn;
+	inherits: false;
+}
+
+@keyframes borderRotate {
+	to {
+		--border-animation-angle: 1turn;
+	}
+}
+
+.ct-border-animation:after {
+    pointer-events: none;
+	content: "";
+	position: absolute;
+	inset: calc(var(--border-animation-width) * -1);
+	border-radius: inherit;
+	border: solid transparent;
+	border-width: var(--border-animation-width);
+	animation: borderRotate var(--border-animation-speed) linear infinite;
+	background: conic-gradient(from var(--border-animation-angle), transparent 88%, var(--border-animation-color), var(--border-animation-color) 100%, transparent) border-box;
+	background-clip: border-box;
+	background-origin: border-box;
+	mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(97% - var(--border-animation-width)), rgba(0, 0, 0, 0)) content-box, radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(2% - var(--border-animation-width)), #000) border-box;
+	-webkit-mask-composite: destination-in;
+	mask-composite: intersect;
+}
